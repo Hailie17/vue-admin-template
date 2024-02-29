@@ -33,7 +33,7 @@ const actions = {
     const { username, password } = userInfo
     const result = await login({ username: username.trim(), password: password })
     // mock 数据返回的是20000
-    if (result.code == 20000) {
+    if (result.code === 20000) {
       commit('SET_TOKEN', result.data.token)
       setToken(result.data.token)
       return 'ok'
@@ -43,24 +43,18 @@ const actions = {
   },
 
   // get user info
-  getInfo({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      getInfo(state.token).then(response => {
-        const { data } = response
-
-        if (!data) {
-          return reject('Verification failed, please Login again.')
-        }
-
-        const { name, avatar } = data
-
-        commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
-        resolve(data)
-      }).catch(error => {
-        reject(error)
-      })
-    })
+  async getInfo({ commit, state }) {
+    const result = await getInfo(state.token)
+    if (result.code === 20000) {
+      if (!result.data) {
+        return Promise.reject(new Error('Verification failed, please Login again'))
+      }
+      const { name, avatar } = result.data
+      commit('SET_NAME', name)
+      commit('SET_AVATAR', avatar)
+    } else {
+      return Promise.reject(new Error('fail'))
+    }
   },
 
   // user logout
