@@ -39,7 +39,7 @@ module.exports = {
     // 配置代理跨域
     proxy: {
       '/dev-api': { // 和 env.development文件中保持一致
-        target: 'http://39.98.123.211:8170/',
+        target: 'http://gmall-h5-api.atguigu.cn/',
         pathRewrite: { '^/dev-api': '' }
       }
     }
