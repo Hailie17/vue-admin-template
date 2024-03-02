@@ -16,7 +16,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination style="margin-top: 10px; textAlign: center" :curret-page="page"  @size-change="handleSizeChange" @current-change="getPageList" :total="total" :page-size="limit" :page-count="7" :page-sizes="[3,5,10]" layout="prev, pager, next, jumper, ->, sizes, total"></el-pagination>
+    <el-pagination style="margin-top: 10px; textAlign: center" :curret-page="page" @size-change="handleSizeChange" @current-change="getPageList" :total="total" :page-size="limit" :page-count="7" :page-sizes="[3,5,10]" layout="prev, pager, next, jumper, ->, sizes, total"></el-pagination>
   </div>
 </template>
 
@@ -41,6 +41,10 @@ export default {
       const res = await this.$API.trademark.reqTradeMarkList(page, limit)
       this.list = res.data.records
       this.total = res.data.total
+    },
+    handleSizeChange(limit) {
+      this.limit = limit
+      this.getPageList()
     }
   }
 }
