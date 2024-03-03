@@ -26,7 +26,7 @@
         </el-form-item>
         <el-form-item label="品牌LOGO" label-width="100px">
           <el-upload class="avatar-uploader" action="/dev-api/admin/product/fileUpload" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
-            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <img v-if="tmForm.logoUrl" :src="tmForm.logoUrl" class="avatar" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
           </el-upload>
@@ -50,7 +50,6 @@ export default {
       total: 0,
       list: [],
       dialogVisible: false,
-      imageUrl: '',
       tmForm: {
         tmName: '',
         logoUrl: ''
@@ -74,13 +73,14 @@ export default {
     },
     showDialog() {
       this.dialogVisible = true
+      this.tmForm = { tmName: '', logoUrl: '' }
     },
 
     updateTradeMark() {
       this.dialogVisible = true
     },
     handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw)
+      this.tmForm.logoUrl = URL.createObjectURL(file.raw)
     },
     beforeAvatarUpload(file) {
       const isJPG = file.type === 'image/jpeg'
