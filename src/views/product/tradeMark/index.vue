@@ -34,7 +34,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        <el-button type="primary" @click="addOrupdateTradeMark">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -93,6 +93,14 @@ export default {
         this.$message.error('上传头像图片大小不能超过 2MB!')
       }
       return isJPG && isLt2M
+    },
+    async addOrupdateTradeMark() {
+      this.dialogVisible = false
+      const res = await this.$API.trademark.reqAddorupdateTradeMark(this.tmForm)
+      if (res.code === 200) {
+        this.$message(this.tmForm.id ? '修改成功' : '添加成功')
+        this.getPageList()
+      }
     }
   }
 }
