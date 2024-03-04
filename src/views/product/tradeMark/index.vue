@@ -97,11 +97,15 @@ export default {
       }
       return isJPG && isLt2M
     },
+    // 添加或修改提交按钮
     async addOrupdateTradeMark() {
       this.dialogVisible = false
       const res = await this.$API.trademark.reqAddorupdateTradeMark(this.tmForm)
       if (res.code === 200) {
-        this.$message(this.tmForm.id ? '修改成功' : '添加成功')
+        this.$message({
+          type: 'success',
+          message: this.tmForm.id ? '修改成功' : '添加成功'
+        })
         this.getPageList()
       }
     }
