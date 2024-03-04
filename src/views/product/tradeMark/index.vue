@@ -19,7 +19,7 @@
     <el-pagination style="margin-top: 10px; textalign: center" :curret-page="page" @size-change="handleSizeChange" @current-change="getPageList" :total="total" :page-size="limit" :page-count="7" :page-sizes="[3, 5, 10]" layout="prev, pager, next, jumper, ->, sizes, total"></el-pagination>
 
     <!-- 对话框 -->
-    <el-dialog title="添加品牌" :visible.sync="dialogVisible">
+    <el-dialog :title="tmForm.id ? '修改品牌' : '添加品牌'" :visible.sync="dialogVisible">
       <el-form style="width: 80%" :modal="tmForm">
         <el-form-item label="品牌名称" label-width="100px">
           <el-input autocomplete="off" v-model="tmForm.tmName"></el-input>
