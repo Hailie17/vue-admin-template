@@ -11,7 +11,7 @@
       </el-table-column>
       <el-table-column prop="prop" label="操作" width="width">
         <template slot-scope="{ row, $index }">
-          <el-button type="warning" icon="el-icon-edit" size="mini" @click="updateTradeMark">修改</el-button>
+          <el-button type="warning" icon="el-icon-edit" size="mini" @click="updateTradeMark(row)">修改</el-button>
           <el-button type="primary" icon="el-icon-delete" size="mini">删除</el-button>
         </template>
       </el-table-column>
@@ -71,14 +71,17 @@ export default {
       this.limit = limit
       this.getPageList()
     },
+    // 添加品牌
     showDialog() {
       this.dialogVisible = true
       this.tmForm = { tmName: '', logoUrl: '' }
     },
-
-    updateTradeMark() {
+    // 修改品牌
+    updateTradeMark(row) {
       this.dialogVisible = true
+      this.tmForm = { ...row }
     },
+    // 图片上传
     handleAvatarSuccess(res, file) {
       this.tmForm.logoUrl = URL.createObjectURL(file.raw)
     },
