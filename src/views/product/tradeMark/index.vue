@@ -106,7 +106,7 @@ export default {
           type: 'success',
           message: this.tmForm.id ? '修改成功' : '添加成功'
         })
-        this.getPageList()
+        this.getPageList(this.tmForm.id ? this.page : 1)
       }
     }
   }
