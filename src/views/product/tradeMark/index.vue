@@ -12,7 +12,7 @@
       <el-table-column prop="prop" label="操作" width="width">
         <template slot-scope="{ row, $index }">
           <el-button type="warning" icon="el-icon-edit" size="mini" @click="updateTradeMark(row)">修改</el-button>
-          <el-button type="primary" icon="el-icon-delete" size="mini">删除</el-button>
+          <el-button type="primary" icon="el-icon-delete" size="mini" @click="deleteTradeMark(row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -130,6 +130,29 @@ export default {
           return false
         }
       })
+    },
+    // 删除图标按钮
+    deleteTradeMark(row) {
+      this.$confirm(`你确定删除${row.tmName}？`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消'
+      })
+        .then(async () => {
+          const res = await this.$API.trademark.deleteTradeMark(row.id)
+          if (res.code === 200) {
+            this.$message({
+              type: 'success',
+              message: '删除成功'
+            })
+          }
+          this.getPageList(this.list.length > 1 ? this.page : this.page - 1)
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
     }
   }
 }

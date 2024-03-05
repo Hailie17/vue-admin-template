@@ -15,3 +15,6 @@ export const reqAddorupdateTradeMark = tradeMark => {
     return request({ url: '/admin/product/baseTrademark/save', method: 'post', data: tradeMark })
   }
 }
+
+// 删除品牌接口
+export const deleteTradeMark = id => request({ url: `/admin/product/baseTrademark/remove/${id}`, method: 'delete' })
