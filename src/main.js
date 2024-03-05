@@ -36,7 +36,10 @@ Vue.use(ElementUI, { locale })
 Vue.config.productionTip = false
 
 import API from '@/api'
+import CategorySelect from '@/components/CategorySelect'
 Vue.prototype.$API = API
+// 注册全局组件
+Vue.component(CategorySelect.name, CategorySelect)
 
 new Vue({
   el: '#app',
