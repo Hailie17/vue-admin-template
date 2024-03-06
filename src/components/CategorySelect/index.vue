@@ -46,6 +46,10 @@ export default {
       }
     },
     async handler1() {
+      this.list2 = []
+      this.list3 = []
+      this.cForm.category2Id = ''
+      this.cForm.category3Id = ''
       const { category1Id } = this.cForm
       const res = await this.$API.attr.reqCategory2List(category1Id)
       if (res.code === 200) {
@@ -53,8 +57,10 @@ export default {
       }
     },
     async handler2() {
+      this.list3 = []
+      this.cForm.category3Id = ''
       const { category2Id } = this.cForm
-      const res = await this.$API.attr.reqCategory2List(category2Id)
+      const res = await this.$API.attr.reqCategory3List(category2Id)
       if (res.code === 200) {
         this.list3 = res.data
       }
