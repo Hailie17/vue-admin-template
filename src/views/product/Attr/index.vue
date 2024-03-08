@@ -3,7 +3,12 @@
     <el-card style="margin: 20px 0">
       <CategorySelect @getCategoryId="getCategoryId"></CategorySelect>
     </el-card>
-    <el-card></el-card>
+    <el-card>
+      <el-button type="primary" icon="el-icon-plus">添加属性</el-button>
+      <el-table style="width: 100%" border :data="attrList">
+        <el-table-column type="index" label="序号" align="center" width="80"></el-table-column>
+      </el-table>
+    </el-card>
   </div>
 </template>
 
@@ -14,7 +19,8 @@ export default {
     return {
       category1Id: '',
       category2Id: '',
-      category3Id: ''
+      category3Id: '',
+      attrList: []
     }
   },
   methods: {
@@ -31,8 +37,11 @@ export default {
         this.getAttrList()
       }
     },
-    getAttrList() {
-      console.log('列表')
+    async getAttrList() {
+      const res = await this.$API.Attr.reqAttrList(this.category1Id, this.category2Id, this.category3Id)
+      if (res.code === 200) {
+        this.attrList = res.data
+      }
     }
   }
 }
