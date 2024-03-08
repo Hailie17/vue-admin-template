@@ -51,6 +51,7 @@ export default {
       this.cForm.category2Id = ''
       this.cForm.category3Id = ''
       const { category1Id } = this.cForm
+      this.$emit('getCategoryId', { categoryId: category1Id, level: 1 })
       const res = await this.$API.attr.reqCategory2List(category1Id)
       if (res.code === 200) {
         this.list2 = res.data
@@ -60,12 +61,16 @@ export default {
       this.list3 = []
       this.cForm.category3Id = ''
       const { category2Id } = this.cForm
+      this.$emit('getCategoryId', { categoryId: category2Id, level: 2 })
       const res = await this.$API.attr.reqCategory3List(category2Id)
       if (res.code === 200) {
         this.list3 = res.data
       }
     },
-    handler3() {}
+    handler3() {
+      const { category3Id } = this.cForm
+      this.$emit('getCategoryId', { categoryId: category3Id, level: 3 })
+    }
   }
 }
 </script>
