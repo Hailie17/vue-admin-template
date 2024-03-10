@@ -97,6 +97,13 @@ export default {
     },
     addAttr() {
       this.ifShowTable = false
+      // 清除数据
+      this.attrInfo = {
+        attrName: '',
+        attrValueList: [],
+        categoryId: this.category3Id, // 收集3级id
+        categoryLevel: 3
+      }
     }
   }
 }
