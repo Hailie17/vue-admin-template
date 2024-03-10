@@ -4,8 +4,8 @@
       <CategorySelect @getCategoryId="getCategoryId"></CategorySelect>
     </el-card>
     <el-card>
-      <el-button type="primary" icon="el-icon-plus" @click="ifShowTable = false" :disabled="!category3Id">添加属性</el-button>
       <div v-show="ifShowTable">
+        <el-button type="primary" icon="el-icon-plus" @click="ifShowTable = false" :disabled="!category3Id">添加属性</el-button>
         <el-table style="width: 100%" border :data="attrList">
           <el-table-column type="index" label="序号" align="center" width="80"></el-table-column>
           <el-table-column prop="attrName" label="属性名称" align="center" width="200"></el-table-column>
@@ -22,11 +22,12 @@
           </el-table-column>
         </el-table>
       </div>
+      <!-- add -->
       <div v-show="!ifShowTable">
-        <el-form :inline="true" ref="form" label-width="80px">
-          <el-table-column prop="attrName" label="属性名">
-            <el-input placeholder="请输入属性名"></el-input>
-          </el-table-column>
+        <el-form :inline="true" ref="form" label-width="80px" :model="attrInfo">
+          <el-form-item prop="attrName" label="属性名">
+            <el-input placeholder="请输入属性名" v-model="attrInfo.attrName"></el-input>
+          </el-form-item>
           <el-button type="primary" icon="el-icon-plus">添加属性值</el-button>
           <el-button @click="ifShowTable = true">取消</el-button>
           <el-table style="width: 100%; margin: 20px 0" border>
@@ -51,7 +52,18 @@ export default {
       category2Id: '',
       category3Id: '',
       attrList: [],
-      ifShowTable: true
+      ifShowTable: true,
+      attrInfo: {
+        attrName: '',
+        attrValueList: [
+          {
+            attrId: 0,
+            valueName: 'string'
+          }
+        ],
+        categoryId: 0,
+        categoryLevel: 3
+      }
     }
   },
   methods: {
