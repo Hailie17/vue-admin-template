@@ -117,6 +117,10 @@ export default {
     },
     toLook(row) {
       row.flag = false
+      if (row.valueName.trim() === '') {
+        this.$message('请输入正确的属性值')
+        return
+      }
     }
   }
 }
