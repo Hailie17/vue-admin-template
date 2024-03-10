@@ -28,7 +28,7 @@
           <el-form-item prop="attrName" label="属性名">
             <el-input placeholder="请输入属性名" v-model="attrInfo.attrName"></el-input>
           </el-form-item>
-          <el-button type="primary" icon="el-icon-plus">添加属性值</el-button>
+          <el-button type="primary" icon="el-icon-plus" @click="addAtrrValue" :disabled="!attrInfo.attrName">添加属性值</el-button>
           <el-button @click="ifShowTable = true">取消</el-button>
           <el-table style="width: 100%; margin: 20px 0" border>
             <el-table-column align="center" label="序号" width="80"></el-table-column>
@@ -55,12 +55,7 @@ export default {
       ifShowTable: true,
       attrInfo: {
         attrName: '',
-        attrValueList: [
-          {
-            attrId: 0,
-            valueName: 'string'
-          }
-        ],
+        attrValueList: [],
         categoryId: 0,
         categoryLevel: 3
       }
@@ -85,6 +80,12 @@ export default {
       if (res.code === 200) {
         this.attrList = res.data
       }
+    },
+    addAtrrValue() {
+      this.attrInfo.attrValueList.push({
+        attrId: undefined,
+        valueName: ''
+      })
     }
   }
 }
