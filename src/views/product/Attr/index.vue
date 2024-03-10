@@ -34,7 +34,8 @@
             <el-table-column align="center" label="序号" width="80"></el-table-column>
             <el-table-column label="属性值名称" prop="prop">
               <template slot-scope="{ row, $index }">
-                <el-input v-model="row.valueName" placeholder="请输入属性名称" size="mini"></el-input>
+                <el-input v-if="row.flag" v-model="row.valueName" placeholder="请输入属性名称" size="mini" @blur="toLook(row)" @keyup.native.enter="toLook(row)"></el-input>
+                <span v-else @click="row.flag = true" style="display: block">{{ row.valueName }}</span>
               </template>
             </el-table-column>
             <el-table-column label="操作">
@@ -90,12 +91,15 @@ export default {
         this.attrList = res.data
       }
     },
+    // 添加属性值
     addAtrrValue() {
       this.attrInfo.attrValueList.push({
-        attrId: undefined,
-        valueName: ''
+        attrId: this.attrInfo.id,
+        valueName: '',
+        flag: true
       })
     },
+    // 添加属性
     addAttr() {
       this.ifShowTable = false
       // 清除数据
@@ -106,9 +110,13 @@ export default {
         categoryLevel: 3
       }
     },
+    // 更新属性
     updateAttr(row) {
       this.ifShowTable = false
       this.attrInfo = cloneDeep(row)
+    },
+    toLook(row) {
+      row.flag = false
     }
   }
 }
