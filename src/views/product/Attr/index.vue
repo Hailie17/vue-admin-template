@@ -15,8 +15,8 @@
             </template>
           </el-table-column>
           <el-table-column label="操作" align="center" width="200">
-            <template slot-scop="{ row, $index }">
-              <el-button type="warning" icon="el-icon-edit" size="mini"></el-button>
+            <template slot-scope="{ row, $index }">
+              <el-button type="warning" icon="el-icon-edit" size="mini" @click="updateAttr(row)"></el-button>
               <el-button type="danger" icon="el-icon-delete" size="mini"></el-button>
             </template>
           </el-table-column>
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import cloneDeep from 'lodash/cloneDeep'
 export default {
   name: 'Attr',
   data() {
@@ -104,6 +105,10 @@ export default {
         categoryId: this.category3Id, // 收集3级id
         categoryLevel: 3
       }
+    },
+    updateAttr(row) {
+      this.ifShowTable = false
+      this.attrInfo = cloneDeep(row)
     }
   }
 }
