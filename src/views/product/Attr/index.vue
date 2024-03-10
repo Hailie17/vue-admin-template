@@ -116,11 +116,17 @@ export default {
       this.attrInfo = cloneDeep(row)
     },
     toLook(row) {
-      row.flag = false
       if (row.valueName.trim() === '') {
         this.$message('请输入正确的属性值')
         return
       }
+      const isRepat = this.attrInfo.attrValueList.some(item => {
+        if (item !== row) {
+          return item.valueName === row.valueName
+        }
+      })
+      if (isRepat) return
+      row.flag = false
     }
   }
 }
