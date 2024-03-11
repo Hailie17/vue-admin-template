@@ -16,7 +16,7 @@
           </el-table-column>
           <el-table-column label="操作" align="center" width="200">
             <template slot-scope="{ row, $index }">
-              <el-button type="warning" icon="el-icon-edit" size="mini" @click="updateAttr(row)" :ref="$index"></el-button>
+              <el-button type="warning" icon="el-icon-edit" size="mini" @click="updateAttr(row)"></el-button>
               <el-button type="danger" icon="el-icon-delete" size="mini"></el-button>
             </template>
           </el-table-column>
@@ -34,8 +34,8 @@
             <el-table-column align="center" label="序号" width="80"></el-table-column>
             <el-table-column label="属性值名称" prop="prop">
               <template slot-scope="{ row, $index }">
-                <el-input v-if="row.flag" v-model="row.valueName" placeholder="请输入属性名称" size="mini" @blur="toLook(row)" @keyup.native.enter="toLook(row)"></el-input>
-                <span v-else @click="toEdit(row)" style="display: block">{{ row.valueName }}</span>
+                <el-input v-if="row.flag" v-model="row.valueName" placeholder="请输入属性名称" size="mini" @blur="toLook(row)" @keyup.native.enter="toLook(row)" :ref="$index"></el-input>
+                <span v-else @click="toEdit(row, $index)" style="display: block">{{ row.valueName }}</span>
               </template>
             </el-table-column>
             <el-table-column label="操作">
@@ -132,7 +132,7 @@ export default {
       row.flag = false
     },
     toEdit(row, index) {
-      row.flag[index] = true
+      row.flag = true
       this.$nextTick(() => {
         this.$refs[index].focus() // 获取表单元素实现聚焦
       })
