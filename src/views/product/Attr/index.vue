@@ -131,8 +131,11 @@ export default {
       if (isRepat) return
       row.flag = false
     },
-    toEdit(row) {
-      row.flag = true
+    toEdit(row, index) {
+      row.flag[index] = true
+      this.$nextTick(() => {
+        this.$refs[index].focus()
+      })
     }
   }
 }
