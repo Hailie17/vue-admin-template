@@ -17,7 +17,7 @@
           <el-table-column label="操作" align="center" width="200">
             <template slot-scope="{ row, $index }">
               <el-button type="warning" icon="el-icon-edit" size="mini" @click="updateAttr(row)"></el-button>
-              <el-popconfirm :title="`确定删除${row.attrName}吗？`">
+              <el-popconfirm :title="`确定删除${row.attrName}吗？`" @confirm="deleteAttr($index)">
                 <el-button slot="reference" type="danger" icon="el-icon-delete" size="mini"></el-button>
               </el-popconfirm>
             </template>
@@ -42,7 +42,9 @@
             </el-table-column>
             <el-table-column label="操作">
               <template slot-scope="{ row, $index }">
-                <el-button type="danger" icon="el-icon-delete" size="mini"></el-button>
+                <el-popconfirm :title="`确定删除${row.valueName}吗？`" @onConfirm="deleteAttr($index)">
+                  <el-button slot="reference" type="danger" icon="el-icon-delete" size="mini"></el-button>
+                </el-popconfirm>
               </template>
             </el-table-column>
           </el-table>
@@ -141,6 +143,10 @@ export default {
       this.$nextTick(() => {
         this.$refs[index].focus() // 获取表单元素实现聚焦
       })
+    },
+    // 气泡删除确认按钮
+    deleteAttr(index) {
+      this.attrInfo.attrValueList.splice(index, 1)
     }
   }
 }
