@@ -114,6 +114,9 @@ export default {
     updateAttr(row) {
       this.ifShowTable = false
       this.attrInfo = cloneDeep(row)
+      this.attrInfo.attrValueList.forEach(item => {
+        this.$set(item, 'flag', false) // this.$set() 响应式
+      })
     },
     toLook(row) {
       if (row.valueName.trim() === '') {
