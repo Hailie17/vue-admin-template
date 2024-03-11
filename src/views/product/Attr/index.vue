@@ -134,7 +134,7 @@ export default {
     toEdit(row, index) {
       row.flag[index] = true
       this.$nextTick(() => {
-        this.$refs[index].focus()
+        this.$refs[index].focus() // 获取表单元素实现聚焦
       })
     }
   }
