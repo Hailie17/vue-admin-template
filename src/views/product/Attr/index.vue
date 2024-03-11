@@ -98,6 +98,9 @@ export default {
         valueName: '',
         flag: true
       })
+      this.$nextTick(() => {
+        this.$refs[this.attrInfo.attrValueList.length - 1].focus()
+      })
     },
     // 添加属性
     addAttr() {
