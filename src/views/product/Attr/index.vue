@@ -147,6 +147,15 @@ export default {
     // 气泡删除确认按钮
     deleteAttr(index) {
       this.attrInfo.attrValueList.splice(index, 1)
+    },
+    // 保存按钮
+    addOrUpdateAttr() {
+      this.attrInfo.attrValueList = this.attrInfo.attrValueList.filter(item => {
+        if (item.valueName !== '') {
+          delete item.flag
+          return true
+        }
+      })
     }
   }
 }
