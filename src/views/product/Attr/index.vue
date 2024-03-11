@@ -149,13 +149,21 @@ export default {
       this.attrInfo.attrValueList.splice(index, 1)
     },
     // 保存按钮
-    addOrUpdateAttr() {
+    async addOrUpdateAttr() {
       this.attrInfo.attrValueList = this.attrInfo.attrValueList.filter(item => {
         if (item.valueName !== '') {
           delete item.flag
           return true
         }
       })
+      try {
+        await this.$API.attr.reqAddOrUpdateAttr(this.attrInfo)
+        this.ifShowTable = true
+        this.$message({ type: 'success', message: '保存成功' })
+        this.attrList()
+      } catch (error) {
+        // this.$message('保存失败')
+      }
     }
   }
 }
