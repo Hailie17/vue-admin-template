@@ -16,7 +16,7 @@
           </el-table-column>
           <el-table-column label="操作" align="center" width="200">
             <template slot-scope="{ row, $index }">
-              <el-button type="warning" icon="el-icon-edit" size="mini" @click="updateAttr(row)"></el-button>
+              <el-button type="warning" icon="el-icon-edit" size="mini" @click="updateAttr(row)" :ref="$index"></el-button>
               <el-button type="danger" icon="el-icon-delete" size="mini"></el-button>
             </template>
           </el-table-column>
@@ -35,7 +35,7 @@
             <el-table-column label="属性值名称" prop="prop">
               <template slot-scope="{ row, $index }">
                 <el-input v-if="row.flag" v-model="row.valueName" placeholder="请输入属性名称" size="mini" @blur="toLook(row)" @keyup.native.enter="toLook(row)"></el-input>
-                <span v-else @click="row.flag = true" style="display: block">{{ row.valueName }}</span>
+                <span v-else @click="toEdit(row)" style="display: block">{{ row.valueName }}</span>
               </template>
             </el-table-column>
             <el-table-column label="操作">
@@ -130,6 +130,9 @@ export default {
       })
       if (isRepat) return
       row.flag = false
+    },
+    toEdit(row) {
+      row.flag = true
     }
   }
 }
