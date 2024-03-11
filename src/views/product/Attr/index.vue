@@ -17,7 +17,9 @@
           <el-table-column label="操作" align="center" width="200">
             <template slot-scope="{ row, $index }">
               <el-button type="warning" icon="el-icon-edit" size="mini" @click="updateAttr(row)"></el-button>
-              <el-button type="danger" icon="el-icon-delete" size="mini"></el-button>
+              <el-popconfirm :title="`确定删除${row.attrName}吗？`">
+                <el-button slot="reference" type="danger" icon="el-icon-delete" size="mini"></el-button>
+              </el-popconfirm>
             </template>
           </el-table-column>
         </el-table>
