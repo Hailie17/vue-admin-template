@@ -36,7 +36,7 @@
             <el-table-column align="center" label="序号" width="80"></el-table-column>
             <el-table-column label="属性值名称" prop="prop">
               <template slot-scope="{ row, $index }">
-                <el-input v-if="row.flag" v-model="row.valueName" placeholder="请输入属性名称" size="mini" @blur="toLook(row)" @keyup.native.enter="toLook(row)" :ref="$index"></el-input>
+                <el-input v-if="row.flag" v-model="row.valueName" placeholder="请输入属性值" size="mini" @blur="toLook(row)" @keyup.native.enter="toLook(row)" :ref="$index"></el-input>
                 <span v-else @click="toEdit(row, $index)" style="display: block">{{ row.valueName }}</span>
               </template>
             </el-table-column>
@@ -48,7 +48,7 @@
               </template>
             </el-table-column>
           </el-table>
-          <el-button type="primary">保存</el-button>
+          <el-button type="primary" @click="addOrUpdateAttr">保存</el-button>
           <el-button @click="ifShowTable = true">取消</el-button>
         </el-form>
       </div>
