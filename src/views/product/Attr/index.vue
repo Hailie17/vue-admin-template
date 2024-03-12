@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <el-card style="margin: 20px 0">
-      <CategorySelect @getCategoryId="getCategoryId"></CategorySelect>
+      <CategorySelect @getCategoryId="getCategoryId" :show="ifShowTable"></CategorySelect>
     </el-card>
     <el-card>
       <div v-show="ifShowTable">
@@ -48,7 +48,7 @@
               </template>
             </el-table-column>
           </el-table>
-          <el-button type="primary" @click="addOrUpdateAttr">保存</el-button>
+          <el-button type="primary" :disabled="attrInfo.attrValueList.length < 1" @click="addOrUpdateAttr">保存</el-button>
           <el-button @click="ifShowTable = true">取消</el-button>
         </el-form>
       </div>

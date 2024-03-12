@@ -2,17 +2,17 @@
   <div class="">
     <el-form :inline="true" class="demo-form-inline" :model="cForm">
       <el-form-item label="一级分类">
-        <el-select v-model="cForm.category1Id" placeholder="请选择" @change="handler1">
+        <el-select v-model="cForm.category1Id" :disabled="!show" placeholder="请选择" @change="handler1">
           <el-option v-for="(item, index) in list1" :key="item.id" :label="item.name" :value="item.id" />
         </el-select>
       </el-form-item>
       <el-form-item label="二级级分类">
-        <el-select v-model="cForm.category2Id" placeholder="请选择" @change="handler2">
+        <el-select v-model="cForm.category2Id" :disabled="!show" placeholder="请选择" @change="handler2">
           <el-option v-for="item in list2" :key="item.id" :label="item.name" :value="item.id" />
         </el-select>
       </el-form-item>
       <el-form-item label="三级分类">
-        <el-select v-model="cForm.category3Id" placeholder="请选择" @change="handler3">
+        <el-select v-model="cForm.category3Id" :disabled="!show" placeholder="请选择" @change="handler3">
           <el-option v-for="item in list3" :key="item.id" :label="item.name" :value="item.id" />
         </el-select>
       </el-form-item>
@@ -23,6 +23,7 @@
 <script>
 export default {
   name: 'CategorySelect',
+  props: ['show'],
   data() {
     return {
       list1: [],
