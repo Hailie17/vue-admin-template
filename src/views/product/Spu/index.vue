@@ -6,7 +6,7 @@
     <el-card>
       <div v-show="show">
         <el-button type="primary" icon="el-icon-plus" @click="addAttr" :disabled="!category3Id">添加SPU</el-button>
-        <el-table style="width: 100%" border :data="attrList">
+        <el-table style="width: 100%" border :data="records">
           <el-table-column type="index" label="序号" align="center" width="80"></el-table-column>
           <el-table-column prop="attrName" label="SPU名称" align="center" width="200"></el-table-column>
           <el-table-column prop="prop" label="SPU描述" align="center">
@@ -14,12 +14,12 @@
               <el-tag type="success" v-for="(value, index) in row.attrValueList" :key="value.id" style="margin: 0 20px">{{ value.valueName }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column label="操作" align="center" width="200">
+          <el-table-column label="操作" align="center" width="250">
             <template slot-scope="{ row, $index }">
               <el-button type="warning" icon="el-icon-plus" size="mini"></el-button>
               <el-button type="warning" icon="el-icon-edit" size="mini" @click="updateAttr(row)"></el-button>
               <el-button type="warning" icon="el-icon-info" size="mini"></el-button>
-              <el-popconfirm :title="`确定删除${row.attrName}吗？`" @confirm="deleteAttr($index)">
+              <el-popconfirm :title="`确定删除${row.attrName}吗？`" @confirm="deleteAttr($index)" style="display: inline-block; margin-left: 10px">
                 <el-button slot="reference" type="danger" icon="el-icon-delete" size="mini"></el-button>
               </el-popconfirm>
             </template>
@@ -72,6 +72,8 @@ export default {
       show: true,
       page: 1,
       limit: 3,
+      total: 0,
+      records: [], // spu列表数据
       attrInfo: {
         attrName: '',
         attrValueList: [],
@@ -97,7 +99,8 @@ export default {
     async getSPUList() {
       const res = await this.$API.spu.reqSpuList(this.page, this.limit, this.category3Id)
       if (res.code === 200) {
-        this.SpuList = res.data
+        this.records = res.data.records
+        this.total = res.data.total
       }
     },
     // 添加属性值
