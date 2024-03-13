@@ -1,10 +1,10 @@
 <template>
   <div class="">
     <el-card style="margin: 20px 0">
-      <CategorySelect :show="ifShowTable" @getCategoryId="getCategoryId" />
+      <CategorySelect :show="show" @getCategoryId="getCategoryId" />
     </el-card>
     <el-card>
-      <div v-show="ifShowTable">
+      <div v-show="show">
         <el-button type="primary" icon="el-icon-plus" @click="addAttr" :disabled="!category3Id">添加SPU</el-button>
         <el-table style="width: 100%" border :data="attrList">
           <el-table-column type="index" label="序号" align="center" width="80"></el-table-column>
@@ -28,13 +28,13 @@
         <el-pagination style="margin-top: 10px; text-align: center" :curret-page="page" @size-change="handleSizeChange" @current-change="getPageList" :total="total" :page-size="limit" :page-count="7" :page-sizes="[3, 5, 10]" layout="prev, pager, next, jumper, ->, sizes, total"></el-pagination>
       </div>
       <!-- add -->
-      <div v-show="!ifShowTable">
+      <div v-show="!show">
         <el-form ref="form" :inline="true" label-width="80px" :model="attrInfo">
           <el-form-item label="属性名">
             <el-input placeholder="请输入属性名" v-model="attrInfo.attrName"></el-input>
           </el-form-item>
           <el-button type="primary" icon="el-icon-plus" @click="addAtrrValue" :disabled="!attrInfo.attrName">添加属性值</el-button>
-          <el-button @click="ifShowTable = true">取消</el-button>
+          <el-button @click="show = true">取消</el-button>
           <el-table style="width: 100%; margin: 20px 0" border :data="attrInfo.attrValueList">
             <el-table-column align="center" label="序号" width="80"></el-table-column>
             <el-table-column label="属性值名称" prop="prop">
@@ -52,7 +52,7 @@
             </el-table-column>
           </el-table>
           <el-button type="primary" :disabled="attrInfo.attrValueList.length < 1" @click="addOrUpdateAttr">保存</el-button>
-          <el-button @click="ifShowTable = true">取消</el-button>
+          <el-button @click="show = true">取消</el-button>
         </el-form>
       </div>
     </el-card>
@@ -69,7 +69,9 @@ export default {
       category2Id: '',
       category3Id: '',
       attrList: [],
-      ifShowTable: true,
+      show: true,
+      page: 1,
+      limit: 3,
       attrInfo: {
         attrName: '',
         attrValueList: [],
@@ -89,13 +91,13 @@ export default {
         this.category3Id = ''
       } else {
         this.category3Id = categoryId
-        this.getAttrList()
+        this.getSPUList()
       }
     },
-    async getAttrList() {
-      const res = await this.$API.attr.reqAttrList(this.category1Id, this.category2Id, this.category3Id)
+    async getSPUList() {
+      const res = await this.$API.spu.reqSpuList(this.page, this.limit, this.category3Id)
       if (res.code === 200) {
-        this.attrList = res.data
+        this.SpuList = res.data
       }
     },
     // 添加属性值
@@ -111,7 +113,7 @@ export default {
     },
     // 添加属性
     addAttr() {
-      this.ifShowTable = false
+      this.show = false
       // 清除数据
       this.attrInfo = {
         attrName: '',
@@ -122,7 +124,7 @@ export default {
     },
     // 更新属性
     updateAttr(row) {
-      this.ifShowTable = false
+      this.show = false
       this.attrInfo = cloneDeep(row)
       this.attrInfo.attrValueList.forEach(item => {
         this.$set(item, 'flag', false) // this.$set() 响应式
@@ -161,7 +163,7 @@ export default {
       })
       try {
         await this.$API.attr.reqAddOrUpdateAttr(this.attrInfo)
-        this.ifShowTable = true
+        this.show = true
         this.$message({ type: 'success', message: '保存成功' })
         this.attrList()
       } catch (error) {
