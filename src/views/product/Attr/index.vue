@@ -144,7 +144,7 @@ export default {
         this.$refs[index].focus() // 获取表单元素实现聚焦
       })
     },
-    // 气泡删除确认按钮
+    // 气泡删除确认按钮array.splice()
     deleteAttr(index) {
       this.attrInfo.attrValueList.splice(index, 1)
     },
