@@ -25,7 +25,7 @@
             </template>
           </el-table-column>
         </el-table>
-        <el-pagination style="margin-top: 10px; text-align: center" :curret-page="page" @size-change="handleSizeChange" @current-change="getPageList" :total="total" :page-size="limit" :page-count="7" :page-sizes="[3, 5, 10]" layout="prev, pager, next, jumper, ->, sizes, total"></el-pagination>
+        <el-pagination style="margin-top: 10px; text-align: center" :curret-page="page" @size-change="handleSizeChange" @current-change="getSPUList(page)" :total="total" :page-size="limit" :page-count="7" :page-sizes="[3, 5, 10]" layout="prev, pager, next, jumper, ->, sizes, total"></el-pagination>
       </div>
       <!-- add -->
       <div v-show="!show">
@@ -96,7 +96,8 @@ export default {
         this.getSPUList()
       }
     },
-    async getSPUList() {
+    async getSPUList(page = 1) {
+      this.page = page
       const res = await this.$API.spu.reqSpuList(this.page, this.limit, this.category3Id)
       if (res.code === 200) {
         this.records = res.data.records
