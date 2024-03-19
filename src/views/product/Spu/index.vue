@@ -8,12 +8,8 @@
         <el-button type="primary" icon="el-icon-plus" @click="addAttr" :disabled="!category3Id">添加SPU</el-button>
         <el-table style="width: 100%" border :data="records">
           <el-table-column type="index" label="序号" align="center" width="80"></el-table-column>
-          <el-table-column prop="attrName" label="SPU名称" width="200"></el-table-column>
-          <el-table-column prop="prop" label="SPU描述">
-            <template slot-scope="{ row, $index }">
-              <el-tag type="success" v-for="(value, index) in row.attrValueList" :key="value.id" style="margin: 0 20px">{{ value.valueName }}</el-tag>
-            </template>
-          </el-table-column>
+          <el-table-column prop="spuName" label="SPU名称" width="200"></el-table-column>
+          <el-table-column prop="description" label="SPU描述"> </el-table-column>
           <el-table-column label="操作" align="center" width="250">
             <template slot-scope="{ row, $index }">
               <hint-button type="warning" icon="el-icon-plus" size="mini" title="添加spu"></hint-button>
