@@ -5,7 +5,7 @@
     </el-card>
     <el-card>
       <div v-show="scene === 0">
-        <el-button type="primary" icon="el-icon-plus" @click="addAttr" :disabled="!category3Id">添加SPU</el-button>
+        <el-button type="primary" icon="el-icon-plus" @click="addSpu" :disabled="!category3Id">添加SPU</el-button>
         <el-table style="width: 100%" border :data="records">
           <el-table-column type="index" label="序号" align="center" width="80"></el-table-column>
           <el-table-column prop="spuName" label="SPU名称" width="200"></el-table-column>
@@ -24,8 +24,8 @@
         <el-pagination style="margin-top: 10px; text-align: center" :curret-page="page" @size-change="handleSizeChange" @current-change="getSPUList" :total="total" :page-size="limit" :page-count="7" :page-sizes="[3, 5, 10]" layout="prev, pager, next, jumper, ->, sizes, total"></el-pagination>
       </div>
       <!-- add -->
-      <spu-form />
-      <sku-form />
+      <spu-form v-show="scene === 1" />
+      <sku-form v-show="scene === 2" />
     </el-card>
   </div>
 </template>
@@ -92,15 +92,8 @@ export default {
       })
     },
     // 添加属性
-    addAttr() {
-      this.show = false
-      // 清除数据
-      this.attrInfo = {
-        attrName: '',
-        attrValueList: [],
-        categoryId: this.category3Id, // 收集3级id
-        categoryLevel: 3
-      }
+    addSpu() {
+      this.scene = 1
     },
     // 更新属性
     updateAttr(row) {

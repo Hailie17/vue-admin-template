@@ -1,5 +1,5 @@
 <template>
-  <div>添加Spu|修改Spu</div>
+  <div>添加Spu</div>
 </template>
 
 <script setup></script>
