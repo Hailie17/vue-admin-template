@@ -4,7 +4,7 @@
       <CategorySelect :show="show" @getCategoryId="getCategoryId" />
     </el-card>
     <el-card>
-      <div v-show="show">
+      <div v-show="scene === 0">
         <el-button type="primary" icon="el-icon-plus" @click="addAttr" :disabled="!category3Id">添加SPU</el-button>
         <el-table style="width: 100%" border :data="records">
           <el-table-column type="index" label="序号" align="center" width="80"></el-table-column>
@@ -24,41 +24,22 @@
         <el-pagination style="margin-top: 10px; text-align: center" :curret-page="page" @size-change="handleSizeChange" @current-change="getSPUList" :total="total" :page-size="limit" :page-count="7" :page-sizes="[3, 5, 10]" layout="prev, pager, next, jumper, ->, sizes, total"></el-pagination>
       </div>
       <!-- add -->
-      <div v-show="!show">
-        <el-form ref="form" :inline="true" label-width="80px" :model="attrInfo">
-          <el-form-item label="属性名">
-            <el-input placeholder="请输入属性名" v-model="attrInfo.attrName"></el-input>
-          </el-form-item>
-          <el-button type="primary" icon="el-icon-plus" @click="addAtrrValue" :disabled="!attrInfo.attrName">添加属性值</el-button>
-          <el-button @click="show = true">取消</el-button>
-          <el-table style="width: 100%; margin: 20px 0" border :data="attrInfo.attrValueList">
-            <el-table-column align="center" label="序号" width="80"></el-table-column>
-            <el-table-column label="属性值名称" prop="prop">
-              <template slot-scope="{ row, $index }">
-                <el-input v-if="row.flag" v-model="row.valueName" placeholder="请输入属性值" size="mini" @blur="toLook(row)" @keyup.native.enter="toLook(row)" :ref="$index"></el-input>
-                <span v-else @click="toEdit(row, $index)" style="display: block">{{ row.valueName }}</span>
-              </template>
-            </el-table-column>
-            <el-table-column label="操作">
-              <template slot-scope="{ row, $index }">
-                <el-popconfirm :title="`确定删除${row.valueName}吗？`" @onConfirm="deleteAttr($index)">
-                  <el-button slot="reference" type="danger" icon="el-icon-delete" size="mini"></el-button>
-                </el-popconfirm>
-              </template>
-            </el-table-column>
-          </el-table>
-          <el-button type="primary" :disabled="attrInfo.attrValueList.length < 1" @click="addOrUpdateAttr">保存</el-button>
-          <el-button @click="show = true">取消</el-button>
-        </el-form>
-      </div>
+      <spu-form />
+      <sku-form />
     </el-card>
   </div>
 </template>
 
 <script>
 import cloneDeep from 'lodash/cloneDeep'
+import SkuForm from './SkuForm'
+import SpuForm from './SpuForm'
 export default {
   name: 'Attr',
+  components: {
+    SkuForm,
+    SpuForm
+  },
   data() {
     return {
       category1Id: '',
@@ -70,12 +51,7 @@ export default {
       limit: 3,
       total: 0,
       records: [], // spu列表数据
-      attrInfo: {
-        attrName: '',
-        attrValueList: [],
-        categoryId: 0,
-        categoryLevel: 3
-      }
+      scene: 0 // 0-spu列表数据 1-添加spu|修改spu 2-添加spu
     }
   },
   methods: {
