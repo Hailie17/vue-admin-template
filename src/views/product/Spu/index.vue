@@ -24,7 +24,7 @@
         <el-pagination style="margin-top: 10px; text-align: center" :curret-page="page" @size-change="handleSizeChange" @current-change="getSPUList" :total="total" :page-size="limit" :page-count="7" :page-sizes="[3, 5, 10]" layout="prev, pager, next, jumper, ->, sizes, total"></el-pagination>
       </div>
       <!-- add -->
-      <spu-form v-show="scene === 1" />
+      <spu-form v-show="scene === 1" @changeScne="changeScne" />
       <sku-form v-show="scene === 2" />
     </el-card>
   </div>
@@ -142,6 +142,10 @@ export default {
       } catch (error) {
         // this.$message('保存失败')
       }
+    },
+    changeScne(scene) {
+      console.log(scene)
+      this.scene = scene
     }
   }
 }
