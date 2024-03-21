@@ -1,6 +1,6 @@
 <template>
   <a :title="title" style="margin: 5px">
-    <el-button v-bind="$attrs" v-on="$listeners"></el-button>
+    <el-button v-bind="$attrs" v-on="$listeners" />
   </a>
 </template>
 <script>
