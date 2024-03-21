@@ -37,6 +37,17 @@
   </div>
 </template>
 
-<script setup></script>
+<script>
+export default {
+  data() {
+    return {}
+  },
+  methods: {
+    initSpuData(row) {
+      console.log('发请求', row)
+    }
+  }
+}
+</script>
 
 <style scoped></style>

@@ -13,7 +13,7 @@
           <el-table-column label="操作" align="center" width="250">
             <template slot-scope="{ row, $index }">
               <hint-button type="warning" icon="el-icon-plus" size="mini" title="添加spu"></hint-button>
-              <hint-button type="warning" icon="el-icon-edit" size="mini" @click="updateAttr(row)" title="修改spu"></hint-button>
+              <hint-button type="warning" icon="el-icon-edit" size="mini" @click="updateSpu(row)" title="修改spu"></hint-button>
               <hint-button type="warning" icon="el-icon-info" size="mini" title="查看当前spu所有sku列表"></hint-button>
               <el-popconfirm :title="`确定删除${row.attrName}吗？`" @confirm="deleteAttr($index)" style="display: inline-block; margin-left: 10px">
                 <hint-button slot="reference" type="danger" icon="el-icon-delete" size="mini" title="删除spu"></hint-button>
@@ -24,7 +24,7 @@
         <el-pagination style="margin-top: 10px; text-align: center" :curret-page="page" @size-change="handleSizeChange" @current-change="getSPUList" :total="total" :page-size="limit" :page-count="7" :page-sizes="[3, 5, 10]" layout="prev, pager, next, jumper, ->, sizes, total"></el-pagination>
       </div>
       <!-- add -->
-      <spu-form v-show="scene === 1" @changeScne="changeScne" />
+      <spu-form v-show="scene === 1" @changeScne="changeScne" ref="spu" />
       <sku-form v-show="scene === 2" />
     </el-card>
   </div>
@@ -80,7 +80,7 @@ export default {
       this.limit = limit
       this.getSPUList()
     },
-    // 添加属性值
+    // 添加Spu值
     addAtrrValue() {
       this.attrInfo.attrValueList.push({
         attrId: this.attrInfo.id,
@@ -91,21 +91,18 @@ export default {
         this.$refs[this.attrInfo.attrValueList.length - 1].focus()
       })
     },
-    // 添加属性
+    // 添加Spu
     addSpu() {
       this.scene = 1
     },
-    // 更新属性
-    updateAttr(row) {
-      this.show = false
-      this.attrInfo = cloneDeep(row)
-      this.attrInfo.attrValueList.forEach(item => {
-        this.$set(item, 'flag', false) // this.$set() 响应式
-      })
+    // 更新Spu
+    updateSpu(row) {
+      this.scene = 1
+      this.$refs.spu.initSpuData(row)
     },
     toLook(row) {
       if (row.valueName.trim() === '') {
-        this.$message('请输入正确的属性值')
+        this.$message('请输入正确的Spu值')
         return
       }
       const isRepat = this.attrInfo.attrValueList.some(item => {
