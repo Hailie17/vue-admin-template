@@ -40,11 +40,28 @@
 <script>
 export default {
   data() {
-    return {}
+    return {
+      dialogImageUrl: '',
+      dialogVisible: false,
+      spu: {}, // spu信息属性
+      tradeMarkList: [], // 品牌信息
+      spuImageList: [] // spu图片信息
+    }
   },
   methods: {
-    initSpuData(row) {
-      console.log('发请求', row)
+    async initSpuData(row) {
+      const spuResult = await this.$API.spu.reqSpu(row.id)
+      if (spuResult.code === 200) {
+        this.spu = spuResult.dada
+      }
+      const tradeMarkResult = await this.$API.spu.reqTradeMarkList()
+      if (tradeMarkResult.code === 200) {
+        this.tradeMarkList = tradeMarkResult.data
+      }
+      const spuImageResult = await this.$API.spu.reqSpuImageList(row.id)
+      if (spuImageResult.code === 200) {
+        this.spuImageList = spuImageResult.data
+      }
     }
   }
 }
