@@ -5,8 +5,8 @@
         <el-input placeholder="SPU名称" v-model="spu.spuName"></el-input>
       </el-form-item>
       <el-form-item label="品牌">
-        <el-select placeholder="请选择品牌">
-          <el-option v-for="(item, index) in tradeMarkList" :key="item.id" :label="item.label" :value="item.label"></el-option>
+        <el-select placeholder="请选择品牌" v-model="spu.tmId">
+          <el-option v-for="(item, index) in tradeMarkList" :key="item.id" :label="item.label" :value="item.id"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="SPU描述">
@@ -19,7 +19,7 @@
       </el-form-item>
       <el-form-item label="销售属性">
         <el-select>
-          <el-option :value="item.label"></el-option>
+          <el-option v-for="(item, index) in tradeMarkList" :key="item.id" :label="item.tmName" :value="item.label"></el-option>
         </el-select>
         <el-button type="primary" icon="el-icon-plus">添加销售属性</el-button>
         <el-table>
@@ -43,7 +43,38 @@ export default {
     return {
       dialogImageUrl: '',
       dialogVisible: false,
-      spu: {}, // spu信息属性
+      spu: {
+        category3Id: 0,
+        description: '',
+        spuImageList: [
+          {
+            id: 0,
+            imgName: '',
+            imgUrl: '',
+            spuId: 0
+          }
+        ],
+        spuName: '',
+        spuSaleAttrList: [
+          {
+            baseSaleAttrId: 0,
+            id: 0,
+            saleAttrName: '',
+            spuId: 0,
+            spuSaleAttrValueList: [
+              {
+                baseSaleAttrId: 0,
+                id: 0,
+                isChecked: '',
+                saleAttrName: '',
+                saleAttrValueName: '',
+                spuId: 0
+              }
+            ]
+          }
+        ],
+        tmId: 0
+      }, // spu信息属性
       tradeMarkList: [], // 品牌信息
       spuImageList: [] // spu图片信息
     }
