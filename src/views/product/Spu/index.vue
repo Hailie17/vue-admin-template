@@ -12,9 +12,9 @@
           <el-table-column prop="description" label="SPU描述"> </el-table-column>
           <el-table-column label="操作" align="center" width="250">
             <template slot-scope="{ row, $index }">
-              <hint-button type="warning" icon="el-icon-plus" size="mini" title="添加spu"></hint-button>
+              <hint-button type="success" icon="el-icon-plus" size="mini" title="添加spu"></hint-button>
               <hint-button type="warning" icon="el-icon-edit" size="mini" @click="updateSpu(row)" title="修改spu"></hint-button>
-              <hint-button type="warning" icon="el-icon-info" size="mini" title="查看当前spu所有sku列表"></hint-button>
+              <hint-button type="info" icon="el-icon-info" size="mini" title="查看当前spu所有sku列表"></hint-button>
               <el-popconfirm :title="`确定删除${row.attrName}吗？`" @confirm="deleteAttr($index)" style="display: inline-block; margin-left: 10px">
                 <hint-button slot="reference" type="danger" icon="el-icon-delete" size="mini" title="删除spu"></hint-button>
               </el-popconfirm>

@@ -11,7 +11,7 @@ export const reqSpuList = (page, limit, category3Id) => request({ url: `/admin/p
 export const reqSpu = spuId => request({ url: `/admin/product/getSpuById/${spuId}`, method: 'get' })
 
 // 获取品牌信息
-export const reqTradeMarkList = () => request({ url: `/admin/product/bageTradeMark/getTradeMarkList`, method: 'get' })
+export const reqTradeMarkList = () => request({ url: `/admin/product/baseTrademark/getTrademarkList`, method: 'get' })
 
 // Spu图标接口
 export const reqSpuImgList = spuId => request({ url: `/admin/product/spuImageList/${spuId}`, method: 'get' })
