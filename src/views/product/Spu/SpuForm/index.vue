@@ -5,12 +5,12 @@
         <el-input v-model="spu.spuName" placeholder="SPU名称" />
       </el-form-item>
       <el-form-item label="品牌">
-        <el-select v-model="spu.tmId" placeholder="请选择品牌">
-          <el-option v-for="(item, index) in tradeMarkList" :key="item.id" :label="item.label" :value="item.id" />
+        <el-select v-model="spu.tmName" placeholder="请选择品牌">
+          <el-option v-for="(item, index) in tradeMarkList" :key="item.id" :label="item.tmName" :value="item.id" />
         </el-select>
       </el-form-item>
       <el-form-item label="SPU描述">
-        <el-input type="textarea" rows="4" placeholder="请输入描述"></el-input>
+        <el-input v-model="spu.description" type="textarea" rows="4" placeholder="请输入描述"></el-input>
       </el-form-item>
       <el-form-item label="SPU图片">
         <el-upload action="" list-type="picture-card" :file-list="spuImageList">
