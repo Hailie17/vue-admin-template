@@ -83,7 +83,7 @@ export default {
     async initSpuData(row) {
       const spuResult = await this.$API.spu.reqSpu(row.id)
       if (spuResult.code === 200) {
-        this.spu = spuResult.dada
+        this.spu = spuResult.data
       }
       const tradeMarkResult = await this.$API.spu.reqTradeMarkList()
       if (tradeMarkResult.code === 200) {
