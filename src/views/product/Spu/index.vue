@@ -31,7 +31,6 @@
 </template>
 
 <script>
-import cloneDeep from 'lodash/cloneDeep'
 import SkuForm from './SkuForm'
 import SpuForm from './SpuForm'
 export default {

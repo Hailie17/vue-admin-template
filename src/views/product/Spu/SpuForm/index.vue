@@ -1,12 +1,12 @@
 <template>
   <div>
-    <el-form ref="form" label-width="80px" :modal="spu">
+    <el-form ref="form" label-width="80px" :model="spu">
       <el-form-item label="SPU名称">
-        <el-input placeholder="SPU名称" v-model="spu.spuName"></el-input>
+        <el-input v-model="spu.spuName" placeholder="SPU名称" />
       </el-form-item>
       <el-form-item label="品牌">
-        <el-select placeholder="请选择品牌" v-model="spu.tmId">
-          <el-option v-for="(item, index) in tradeMarkList" :key="item.id" :label="item.label" :value="item.id"></el-option>
+        <el-select v-model="spu.tmId" placeholder="请选择品牌">
+          <el-option v-for="(item, index) in tradeMarkList" :key="item.id" :label="item.label" :value="item.id" />
         </el-select>
       </el-form-item>
       <el-form-item label="SPU描述">
@@ -46,32 +46,32 @@ export default {
       spu: {
         category3Id: 0,
         description: '',
-        spuImageList: [
-          {
-            id: 0,
-            imgName: '',
-            imgUrl: '',
-            spuId: 0
-          }
-        ],
         spuName: '',
+        spuImageList: [
+          // {
+          //   id: 0,
+          //   imgName: '',
+          //   imgUrl: '',
+          //   spuId: 0
+          // }
+        ],
         spuSaleAttrList: [
-          {
-            baseSaleAttrId: 0,
-            id: 0,
-            saleAttrName: '',
-            spuId: 0,
-            spuSaleAttrValueList: [
-              {
-                baseSaleAttrId: 0,
-                id: 0,
-                isChecked: '',
-                saleAttrName: '',
-                saleAttrValueName: '',
-                spuId: 0
-              }
-            ]
-          }
+          // {
+          //   baseSaleAttrId: 0,
+          //   id: 0,
+          //   saleAttrName: '',
+          //   spuId: 0,
+          //   spuSaleAttrValueList: [
+          //     {
+          //       baseSaleAttrId: 0,
+          //       id: 0,
+          //       isChecked: '',
+          //       saleAttrName: '',
+          //       saleAttrValueName: '',
+          //       spuId: 0
+          //     }
+          //   ]
+          // }
         ],
         tmId: 0
       }, // spu信息属性
