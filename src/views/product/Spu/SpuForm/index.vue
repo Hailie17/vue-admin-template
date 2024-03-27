@@ -29,6 +29,7 @@
           <el-table-column label="操作"></el-table-column>
         </el-table>
       </el-form-item>
+
       <el-form-item>
         <el-button type="primary">保存</el-button>
         <el-button @click="$emit('changeScne', 0)">取消</el-button>
