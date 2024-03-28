@@ -89,7 +89,7 @@ export default {
       if (tradeMarkResult.code === 200) {
         this.tradeMarkList = tradeMarkResult.data
       }
-      const spuImageResult = await this.$API.spu.reqSpuImageList(row.id)
+      const spuImageResult = await this.$API.spu.reqSpuImgList(row.id)
       if (spuImageResult.code === 200) {
         const listArr = spuImageResult.data
         listArr.forEach(item => {
