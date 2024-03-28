@@ -91,7 +91,12 @@ export default {
       }
       const spuImageResult = await this.$API.spu.reqSpuImageList(row.id)
       if (spuImageResult.code === 200) {
-        this.spuImageList = spuImageResult.data
+        const listArr = spuImageResult.data
+        listArr.forEach(item => {
+          item.name = item.imgName
+          item.url = item.imgUrl
+        })
+        this.spuImageList = listArr
       }
     }
   }
