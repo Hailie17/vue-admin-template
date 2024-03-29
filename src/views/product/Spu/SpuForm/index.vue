@@ -25,7 +25,11 @@
         <el-table style="width: 100%" border :data="spu.spuSaleAttrList">
           <el-table-column type="index" label="序号" width="80px" align="center"></el-table-column>
           <el-table-column prop="saleAttrName" label="属性名"></el-table-column>
-          <el-table-column label="属性值名称列表"></el-table-column>
+          <el-table-column label="属性值名称列表">
+            <template slot-scope="{ row, $index }">
+              <el-tag v-for="tag in row.spuSaleAttrValueList" :key="tag.id" closable :disable-transitions="false">{{ tag.saleAttrValueName }}</el-tag>
+            </template>
+          </el-table-column>
           <el-table-column label="操作"></el-table-column>
         </el-table>
       </el-form-item>
