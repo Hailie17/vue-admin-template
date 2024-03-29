@@ -28,9 +28,15 @@
           <el-table-column label="属性值名称列表">
             <template slot-scope="{ row, $index }">
               <el-tag v-for="tag in row.spuSaleAttrValueList" :key="tag.id" closable :disable-transitions="false">{{ tag.saleAttrValueName }}</el-tag>
+              <el-input class="input-new-tag" v-if="row.inputVisible" ref="saveTagInput" size="small"></el-input>
+              <el-button class="button-new-tag" v-else size="small">添加</el-button>
             </template>
           </el-table-column>
-          <el-table-column label="操作"></el-table-column>
+          <el-table-column label="操作">
+            <template slot-scope="{ row, $index }">
+              <el-button type="danger" icon="el-icon-delete" size="mini"></el-button>
+            </template>
+          </el-table-column>
         </el-table>
       </el-form-item>
       <el-form-item>
