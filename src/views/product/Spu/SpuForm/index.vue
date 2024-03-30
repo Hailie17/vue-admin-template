@@ -21,7 +21,7 @@
         <el-select v-model="attrId" :placeholder="`还有${unSelectSaleAttr.length}未选择`">
           <el-option v-for="(item, index) in unSelectSaleAttr" :key="item.id" :label="item.name" :value="item.id" />
         </el-select>
-        <el-button type="primary" icon="el-icon-plus">添加销售属性</el-button>
+        <el-button type="primary" icon="el-icon-plus" :disabled="!attrId">添加销售属性</el-button>
         <el-table style="width: 100%" border :data="spu.spuSaleAttrList">
           <el-table-column type="index" label="序号" width="80px" align="center"></el-table-column>
           <el-table-column prop="saleAttrName" label="属性名"></el-table-column>
