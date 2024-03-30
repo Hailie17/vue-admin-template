@@ -18,8 +18,8 @@
         </el-upload>
       </el-form-item>
       <el-form-item label="销售属性">
-        <el-select>
-          <el-option v-for="(item, index) in tradeMarkList" :key="item.id" :label="item.tmName" :value="item.label"></el-option>
+        <el-select :placeholder="`还有${unSelectSaleAttr.length}未选择`" value="">
+          <el-option v-for="(item, index) in unSelectSaleAttr" :key="item.id" :label="item.name" :value="item.id" />
         </el-select>
         <el-button type="primary" icon="el-icon-plus">添加销售属性</el-button>
         <el-table style="width: 100%" border :data="spu.spuSaleAttrList">
@@ -28,8 +28,8 @@
           <el-table-column label="属性值名称列表">
             <template slot-scope="{ row, $index }">
               <el-tag v-for="tag in row.spuSaleAttrValueList" :key="tag.id" closable :disable-transitions="false">{{ tag.saleAttrValueName }}</el-tag>
-              <el-input class="input-new-tag" v-if="row.inputVisible" ref="saveTagInput" size="small"></el-input>
-              <el-button class="button-new-tag" v-else size="small">添加</el-button>
+              <el-input v-if="row.inputVisible" ref="saveTagInput" size="small" class="input-new-tag" />
+              <el-button v-else size="small" class="button-new-tag">添加</el-button>
             </template>
           </el-table-column>
           <el-table-column label="操作">
@@ -86,7 +86,8 @@ export default {
         tmId: 0
       }, // spu信息属性
       tradeMarkList: [], // 品牌信息
-      spuImageList: [] // spu图片信息
+      spuImageList: [], // spu图片信息
+      attrId: '' // 收集未选择的销售属性的id
     }
   },
   methods: {
