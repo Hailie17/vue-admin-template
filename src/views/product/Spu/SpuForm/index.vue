@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ unSelectSaleAttr }}
     <el-form ref="form" label-width="80px" :model="spu">
       <el-form-item label="SPU名称">
         <el-input v-model="spu.spuName" placeholder="SPU名称" />
@@ -28,13 +29,13 @@
           <el-table-column label="属性值名称列表">
             <template slot-scope="{ row, $index }">
               <el-tag v-for="tag in row.spuSaleAttrValueList" :key="tag.id" closable :disable-transitions="false">{{ tag.saleAttrValueName }}</el-tag>
-              <el-input v-if="row.inputVisible" ref="saveTagInput" size="small" class="input-new-tag" />
+              <el-input v-if="row.inputVisible" ref="saveTagInput" v-model="row.inputValue" size="small" class="input-new-tag" />
               <el-button v-else size="small" class="button-new-tag">添加</el-button>
             </template>
           </el-table-column>
           <el-table-column label="操作">
             <template slot-scope="{ row, $index }">
-              <el-button type="danger" icon="el-icon-delete" size="mini"></el-button>
+              <el-button type="danger" icon="el-icon-delete" size="mini" />
             </template>
           </el-table-column>
         </el-table>
@@ -88,6 +89,17 @@ export default {
       tradeMarkList: [], // 品牌信息
       spuImageList: [], // spu图片信息
       attrId: '' // 收集未选择的销售属性的id
+    }
+  },
+  computed: {
+    unSelectSaleAttr() {
+      const result = this.saleAttrList.filter(item => {
+        return this.spuSaleAttrList.every(item1 => {
+          // every方法返回布尔值
+          return item.name !== item1.saleAttrName
+        })
+      })
+      return result
     }
   },
   methods: {
