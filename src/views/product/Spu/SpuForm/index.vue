@@ -19,9 +19,9 @@
       </el-form-item>
       <el-form-item label="销售属性">
         <el-select v-model="attrId" :placeholder="`还有${unSelectSaleAttr.length}未选择`">
-          <el-option v-for="(item, index) in unSelectSaleAttr" :key="item.id" :label="item.name" :value="item.id" />
+          <el-option v-for="(item, index) in unSelectSaleAttr" :key="item.id" :label="item.name" :value="`${item.id}:${item.name}`" />
         </el-select>
-        <el-button type="primary" icon="el-icon-plus" :disabled="!attrId">添加销售属性</el-button>
+        <el-button type="primary" icon="el-icon-plus" :disabled="!attrId" @click="addSaleAttr">添加销售属性</el-button>
         <el-table style="width: 100%" border :data="spu.spuSaleAttrList">
           <el-table-column type="index" label="序号" width="80px" align="center" />
           <el-table-column prop="saleAttrName" label="属性名" />
@@ -116,6 +116,17 @@ export default {
     // 照片墙图片上传成功的回调
     handlerSuccess(response, file, fileList) {
       this.spuImageList = fileList
+    },
+    // 添加销售属性
+    addSaleAttr() {
+      const [baseSaleAttrId, saleAttrName] = this.attrId.split(':')
+      const newSaleAttr = {
+        baseSaleAttrId,
+        saleAttrName,
+        spuSaleAttrValueList: []
+      }
+      this.spu.spuSaleAttrList.push(newSaleAttr)
+      this.attrId = ''
     },
     async initSpuData(row) {
       const spuResult = await this.$API.spu.reqSpu(row.id)
