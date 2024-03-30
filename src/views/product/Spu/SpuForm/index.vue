@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ unSelectSaleAttr }}
     <el-form ref="form" label-width="80px" :model="spu">
       <el-form-item label="SPU名称">
         <el-input v-model="spu.spuName" placeholder="SPU名称" />
@@ -89,7 +88,8 @@ export default {
       tradeMarkList: [], // 品牌信息
       spuImageList: [], // spu图片信息
       attrId: '', // 收集未选择的销售属性的id
-      saleAttrList: []
+      saleAttrList: [],
+      spuSaleAttrList: []
     }
   },
   computed: {
