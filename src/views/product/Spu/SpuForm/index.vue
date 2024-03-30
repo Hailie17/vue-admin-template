@@ -88,7 +88,8 @@ export default {
       }, // spu信息属性
       tradeMarkList: [], // 品牌信息
       spuImageList: [], // spu图片信息
-      attrId: '' // 收集未选择的销售属性的id
+      attrId: '', // 收集未选择的销售属性的id
+      saleAttrList: []
     }
   },
   computed: {
@@ -120,6 +121,10 @@ export default {
           item.url = item.imgUrl
         })
         this.spuImageList = listArr
+      }
+      const saleResult = await this.$API.spu.reqBaseSaleAttrList()
+      if (saleResult.code === 200) {
+        this.saleAttrList = saleResult.data
       }
     }
   }
