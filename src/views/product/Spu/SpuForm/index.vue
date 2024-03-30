@@ -13,7 +13,7 @@
         <el-input v-model="spu.description" type="textarea" rows="4" placeholder="请输入描述" />
       </el-form-item>
       <el-form-item label="SPU图片">
-        <el-upload action="/dev-api/admin/product/fileUpload" list-type="picture-card" :file-list="spuImageList" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
+        <el-upload action="/dev-api/admin/product/fileUpload" list-type="picture-card" :file-list="spuImageList" :on-success="handlerSuccess" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
           <i class="el-icon-plus"></i>
         </el-upload>
       </el-form-item>
@@ -104,10 +104,18 @@ export default {
     }
   },
   methods: {
-    handleRemove(file, fileList) {},
+    handleRemove(file, fileList) {
+      // file 删除的图片
+      // fileList 删除后剩余的图片
+      this.spuImageList = fileList
+    },
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url
       this.dialogVisible = true
+    },
+    // 照片墙图片上传成功的回调
+    handlerSuccess(response, file, fileList) {
+      this.spuImageList = fileList
     },
     async initSpuData(row) {
       const spuResult = await this.$API.spu.reqSpu(row.id)
