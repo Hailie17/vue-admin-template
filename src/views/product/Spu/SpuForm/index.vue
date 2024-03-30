@@ -10,10 +10,10 @@
         </el-select>
       </el-form-item>
       <el-form-item label="SPU描述">
-        <el-input v-model="spu.description" type="textarea" rows="4" placeholder="请输入描述"></el-input>
+        <el-input v-model="spu.description" type="textarea" rows="4" placeholder="请输入描述" />
       </el-form-item>
       <el-form-item label="SPU图片">
-        <el-upload action="/dev-api/admin/product/fileUpload" list-type="picture-card" :file-list="spuImageList">
+        <el-upload action="/dev-api/admin/product/fileUpload" list-type="picture-card" :file-list="spuImageList" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
           <i class="el-icon-plus"></i>
         </el-upload>
       </el-form-item>
@@ -23,8 +23,8 @@
         </el-select>
         <el-button type="primary" icon="el-icon-plus" :disabled="!attrId">添加销售属性</el-button>
         <el-table style="width: 100%" border :data="spu.spuSaleAttrList">
-          <el-table-column type="index" label="序号" width="80px" align="center"></el-table-column>
-          <el-table-column prop="saleAttrName" label="属性名"></el-table-column>
+          <el-table-column type="index" label="序号" width="80px" align="center" />
+          <el-table-column prop="saleAttrName" label="属性名" />
           <el-table-column label="属性值名称列表">
             <template slot-scope="{ row, $index }">
               <el-tag v-for="tag in row.spuSaleAttrValueList" :key="tag.id" closable :disable-transitions="false">{{ tag.saleAttrValueName }}</el-tag>
@@ -104,6 +104,11 @@ export default {
     }
   },
   methods: {
+    handleRemove(file, fileList) {},
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url
+      this.dialogVisible = true
+    },
     async initSpuData(row) {
       const spuResult = await this.$API.spu.reqSpu(row.id)
       if (spuResult.code === 200) {
