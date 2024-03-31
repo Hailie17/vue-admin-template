@@ -35,7 +35,7 @@
           </el-table-column>
           <el-table-column label="操作">
             <template slot-scope="{ row, $index }">
-              <el-button type="danger" icon="el-icon-delete" size="mini" />
+              <el-button type="danger" icon="el-icon-delete" size="mini" @click="spu.spuSaleAttrList.splice($index, 1)" />
             </template>
           </el-table-column>
         </el-table>
