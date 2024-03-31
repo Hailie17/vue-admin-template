@@ -133,6 +133,9 @@ export default {
       this.$set(row, 'inputVisible', true)
     },
     handleInputConfirm(row) {
+      const { baseSaleAttrId, inputValue } = row
+      const newSaleAttrValue = { baseSaleAttrId, saleAttrValueName: inputValue }
+      row.spuSaleAttrValueList.push(newSaleAttrValue)
       row.inputVisible = false
     },
     async initSpuData(row) {
