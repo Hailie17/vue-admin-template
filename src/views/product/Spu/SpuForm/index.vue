@@ -134,6 +134,9 @@ export default {
     },
     handleInputConfirm(row) {
       const { baseSaleAttrId, inputValue } = row
+      if (inputValue.trim() === '') {
+        this.$message('属性值不能为空')
+      }
       const newSaleAttrValue = { baseSaleAttrId, saleAttrValueName: inputValue }
       row.spuSaleAttrValueList.push(newSaleAttrValue)
       row.inputVisible = false
