@@ -29,8 +29,8 @@
           <el-table-column label="属性值名称列表">
             <template slot-scope="{ row, $index }">
               <el-tag v-for="tag in row.spuSaleAttrValueList" :key="tag.id" closable :disable-transitions="false">{{ tag.saleAttrValueName }}</el-tag>
-              <el-input v-if="row.inputVisible" ref="saveTagInput" v-model="row.inputValue" size="small" class="input-new-tag" />
-              <el-button v-else size="small" class="button-new-tag">添加</el-button>
+              <el-input v-if="row.inputVisible" ref="saveTagInput" v-model="row.inputValue" size="small" class="input-new-tag" @blur="handleInputConfirm(row)" />
+              <el-button v-else size="small" class="button-new-tag" @click="addSaleAttrValue(row)">添加</el-button>
             </template>
           </el-table-column>
           <el-table-column label="操作">
@@ -129,6 +129,10 @@ export default {
       this.spu.spuSaleAttrList.push(newSaleAttr)
       this.attrId = ''
     },
+    addSaleAttrValue(row) {
+      this.$set(row, 'inputVisible', true)
+    },
+    handleInputConfirm(row) {},
     async initSpuData(row) {
       const spuResult = await this.$API.spu.reqSpu(row.id)
       if (spuResult.code === 200) {
