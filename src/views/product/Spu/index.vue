@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <el-card style="margin: 20px 0">
-      <CategorySelect :show="show" @getCategoryId="getCategoryId" />
+      <CategorySelect :show="scene == 0" @getCategoryId="getCategoryId" />
     </el-card>
     <el-card>
       <div v-show="scene === 0">
@@ -45,7 +45,6 @@ export default {
       category2Id: '',
       category3Id: '',
       attrList: [],
-      show: true,
       page: 1,
       limit: 3,
       total: 0,
