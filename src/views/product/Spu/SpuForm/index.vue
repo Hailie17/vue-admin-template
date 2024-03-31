@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ attrId }}
     <el-form ref="form" label-width="80px" :model="spu">
       <el-form-item label="SPU名称">
         <el-input v-model="spu.spuName" placeholder="SPU名称" />
