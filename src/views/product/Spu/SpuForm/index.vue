@@ -134,9 +134,14 @@ export default {
     },
     handleInputConfirm(row) {
       const { baseSaleAttrId, inputValue } = row
+      // 不能为空
       if (inputValue.trim() === '') {
         this.$message('属性值不能为空')
+        return
       }
+      // 不能重复
+      const result = row.spuSaleAttrValueList.every(item => item.saleAttrValueName !== inputValue)
+      if (!result) return
       const newSaleAttrValue = { baseSaleAttrId, saleAttrValueName: inputValue }
       row.spuSaleAttrValueList.push(newSaleAttrValue)
       row.inputVisible = false
