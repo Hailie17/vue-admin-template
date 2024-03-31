@@ -132,7 +132,9 @@ export default {
     addSaleAttrValue(row) {
       this.$set(row, 'inputVisible', true)
     },
-    handleInputConfirm(row) {},
+    handleInputConfirm(row) {
+      row.inputVisible = false
+    },
     async initSpuData(row) {
       const spuResult = await this.$API.spu.reqSpu(row.id)
       if (spuResult.code === 200) {
