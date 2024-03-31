@@ -28,7 +28,7 @@
           <el-table-column prop="saleAttrName" label="属性名" />
           <el-table-column label="属性值名称列表">
             <template slot-scope="{ row, $index }">
-              <el-tag v-for="tag in row.spuSaleAttrValueList" :key="tag.id" closable :disable-transitions="false">{{ tag.saleAttrValueName }}</el-tag>
+              <el-tag v-for="(tag, index) in row.spuSaleAttrValueList" :key="tag.id" closable :disable-transitions="false" @close="row.spuSaleAttrValueList.splice(index, 1)">{{ tag.saleAttrValueName }}</el-tag>
               <el-input v-if="row.inputVisible" ref="saveTagInput" v-model="row.inputValue" size="small" class="input-new-tag" @blur="handleInputConfirm(row)" />
               <el-button v-else size="small" class="button-new-tag" @click="addSaleAttrValue(row)">添加</el-button>
             </template>
