@@ -139,8 +139,8 @@ export default {
       }
     },
     changeScne(scene) {
-      console.log(scene)
       this.scene = scene
+      this.getSPUList(this.page)
     }
   }
 }
