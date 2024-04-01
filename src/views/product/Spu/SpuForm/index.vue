@@ -181,9 +181,9 @@ export default {
       })
       try {
         const response = await this.$API.spu.reqAddOrUpdateSpu(this.spu)
-        if (response.code === 200) {
-          this.$message({ type: 'success', message: '保存成功' })
-        }
+
+        this.$message({ type: 'success', message: '保存成功' })
+
         this.$emit('changeScne', 0)
       } catch (error) {
         console.log(error)
