@@ -92,6 +92,7 @@ export default {
     // 添加Spu
     addSpu() {
       this.scene = 1
+      this.$refs.spu.addSpuData()
     },
     // 更新Spu
     updateSpu(row) {
