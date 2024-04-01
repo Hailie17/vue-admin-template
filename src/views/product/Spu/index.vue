@@ -139,9 +139,14 @@ export default {
         // this.$message('保存失败')
       }
     },
-    changeScne(scene) {
+    changeScne({ scene, flag }) {
+      // flag 判断保存按钮为修改或添加
       this.scene = scene
-      this.getSPUList(this.page)
+      if (flag === '修改') {
+        this.getSPUList(this.page)
+      } else {
+        this.getSPUList()
+      }
     }
   }
 }
