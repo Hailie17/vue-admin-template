@@ -42,7 +42,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="addOrUpdateSpu">保存</el-button>
-        <el-button @click="$emit('changeScne', 0)">取消</el-button>
+        <el-button @click="cancel">取消</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -186,10 +186,19 @@ export default {
       } catch (error) {
         console.log(error)
       }
+      Object.assign(this._data, this.$options.data()) // 清除数据
     },
     // 添加spu
     addSpuData(category3Id) {
       this.spu.category3Id = category3Id
+    },
+    // 取消按钮
+    cancel() {
+      this.$emit('changeScne', { scene: 0, flag: '' })
+      // Object.assign:es6中新增的方法可以合并对象
+      // 组件实例this._data,可以操作data当中响应式数据
+      // this.$options可以获取配置对象，配置对象的data函数执行，返回的响应式数据为空的
+      Object.assign(this._data, this.$options.data()) // 清除数据
     }
   }
 }
