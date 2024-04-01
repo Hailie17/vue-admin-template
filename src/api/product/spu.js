@@ -18,3 +18,14 @@ export const reqSpuImgList = spuId => request({ url: `/admin/product/spuImageLis
 
 // 平台全部销售属性
 export const reqBaseSaleAttrList = () => request({ url: `/admin/product/baseSaleAttrList`, method: 'get' })
+
+// 修改 || 添加SPU
+export const reqAddOrUpdateSpu = spuInfo => {
+  if (spuInfo.id) {
+    // 参数有id， 修改spu
+    request({ url: '/admin/product/updateSpuInfo', method: 'post', data: spuInfo })
+  } else {
+    // 无id， 新增spu
+    request({ url: '/admin/product/saveSpuInfo', method: 'post', data: spuInfo })
+  }
+}
