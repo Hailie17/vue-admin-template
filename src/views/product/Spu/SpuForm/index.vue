@@ -41,7 +41,7 @@
         </el-table>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary">保存</el-button>
+        <el-button type="primary" @click="addOrUpdateSpu">保存</el-button>
         <el-button @click="$emit('changeScne', 0)">取消</el-button>
       </el-form-item>
     </el-form>
@@ -168,6 +168,17 @@ export default {
       if (saleResult.code === 200) {
         this.saleAttrList = saleResult.data
       }
+    },
+    // 保存 || 编辑spu
+    addOrUpdateSpu() {
+      // 图片需要有imgName 和 imageUrl 字段
+      // map（） 返回新数组
+      this.spu = this.spuImageList.map(item => {
+        return {
+          imgName: item.name,
+          imageUrl: (item.response && item.response.data) || item.url
+        }
+      })
     }
   }
 }
