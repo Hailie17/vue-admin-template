@@ -181,13 +181,15 @@ export default {
       })
       try {
         const response = await this.$API.spu.reqAddOrUpdateSpu(this.spu)
-
         this.$message({ type: 'success', message: '保存成功' })
-
-        this.$emit('changeScne', 0)
+        this.$emit('changeScne', { scene: 0, flag: this.spu.id ? '修改' : '添加' })
       } catch (error) {
         console.log(error)
       }
+    },
+    // 添加spu
+    addSpuData(category3Id) {
+      this.spu.category3Id = category3Id
     }
   }
 }
