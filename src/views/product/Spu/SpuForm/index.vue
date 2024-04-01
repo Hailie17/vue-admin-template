@@ -170,15 +170,19 @@ export default {
       }
     },
     // 保存 || 编辑spu
-    addOrUpdateSpu() {
+    async addOrUpdateSpu() {
       // 图片需要有imgName 和 imageUrl 字段
       // map（） 返回新数组
-      this.spu = this.spuImageList.map(item => {
+      this.spu.spuImageList = this.spuImageList.map(item => {
         return {
           imgName: item.name,
           imageUrl: (item.response && item.response.data) || item.url
         }
       })
+      const res = await this.$API.reqAddOrUpdateSpu(this.spu)
+      if (res.code === 200) {
+        this.$message({ type: 'success', message: '保存成功' })
+      }
     }
   }
 }
