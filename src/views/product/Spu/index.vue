@@ -15,9 +15,7 @@
               <hint-button type="success" icon="el-icon-plus" size="mini" title="添加spu"></hint-button>
               <hint-button type="warning" icon="el-icon-edit" size="mini" @click="updateSpu(row)" title="修改spu"></hint-button>
               <hint-button type="info" icon="el-icon-info" size="mini" title="查看当前spu所有sku列表"></hint-button>
-              <el-popconfirm :title="`确定删除${row.attrName}吗？`" @confirm="deleteAttr($index)" style="display: inline-block; margin-left: 10px">
-                <hint-button slot="reference" type="danger" icon="el-icon-delete" size="mini" title="删除spu"></hint-button>
-              </el-popconfirm>
+              <hint-button slot="reference" type="danger" icon="el-icon-delete" size="mini" title="删除spu" @click="deleteSpu(row)"></hint-button>
             </template>
           </el-table-column>
         </el-table>
@@ -94,6 +92,8 @@ export default {
       this.scene = 1
       this.$refs.spu.addSpuData(this.category3Id)
     },
+    // 删除spu
+    deleteSpu(row) {},
     // 更新Spu
     updateSpu(row) {
       this.scene = 1
